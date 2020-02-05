@@ -65,7 +65,7 @@
         search: '', // 搜索过滤字段
         totalBrands: 0, // 总条数
         brands: [], // 当前页品牌数据
-        loading: true, // 是否在加载中
+        loading: false, // 是否在加载中
         pagination: {}, // 分页信息
         headers: [
           {text: 'id', align: 'center', value: 'id'},
@@ -99,6 +99,7 @@
     },
     methods: {
       getDataFromServer() { // 从服务的加载数的方法。
+        this.loading = false;
         // 发起请求
         this.$http.get("/item/brand/page", {
           params: {
