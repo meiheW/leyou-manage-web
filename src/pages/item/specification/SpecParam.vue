@@ -124,7 +124,7 @@ export default {
   methods: {
     loadData() {
       this.$http
-        .get("/item/spec/params?gid=" + this.group.id)
+        .get("/item/spec/param/list?gid=" + this.group.id)
         .then(({ data }) => {
           data.forEach(p => {
               p.segments = p.segments ? p.segments.split(",").map(s => s.split("-")) : [];
@@ -146,16 +146,19 @@ export default {
           groupId: this.group.id,
           segments:[],
           numeric:false,
+          unit:"",
           searching:false,
           generic:false}
       this.show = true;
+      this.isEdit = false;
     },
     deleteParam(id) {
         this.$message.confirm("确认要删除该参数吗？")
         .then(() => {
-            this.$http.delete("/item/spec/param/" + id)
+            this.$http.delete("/item/spec/param/delete/" + id)
             .then(() => {
                 this.$message.success("删除成功");
+                this.loadData();
             })
             .catch(() => {
                 this.$message.error("删除失败");
@@ -170,8 +173,8 @@ export default {
         Object.assign(p, this.param);
         p.segments = p.segments.map(s => s.join("-")).join(",")
         this.$http({
-            method: this.isEdit ? 'put' : 'post',
-            url: '/item/spec/param',
+            method:'post',
+            url: this.isEdit ? '/item/spec/param/edit' : '/item/spec/param/add',
             data: p,
         }).then(() => {
             // 关闭窗口
