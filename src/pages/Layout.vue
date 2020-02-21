@@ -14,7 +14,7 @@
         <v-list class="pa-0">
           <v-list-tile avatar>
             <v-list-tile-avatar>
-              <img src="../assets/2.jpeg">
+              <img src="../assets/tomster.jpg">
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>Tomster</v-list-tile-title>
