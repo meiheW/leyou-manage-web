@@ -217,8 +217,8 @@ export default {
       goodsParams.spuDetail.specialSpec = JSON.stringify(specTemplate);
 
       this.$http({
-        method: this.isEdit ? "put" : "post",
-        url: "/item/goods",
+        method: "post",
+        url: this.isEdit ? "/item/goods/edit" : "/item/goods/add",
         data: goodsParams
       })
         .then(() => {
@@ -284,7 +284,7 @@ export default {
             });
           // 根据分类查询规格参数
           this.$http
-            .get("/item/spec/params?cid=" + this.goods.categories[2].id)
+            .get("/item/spec/param/list?cid=" + this.goods.categories[2].id)
             .then(({ data }) => {
               let specs = [];
               let template = [];
